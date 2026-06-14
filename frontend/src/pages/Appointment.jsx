@@ -17,40 +17,41 @@ const Appointment = () => {
   const [slotTime, setSlotTime] = useState('')
 
   const fetchDocInfo = async () => {
-    const docInfo = doctors.find(doc => doc._id === docId)
-    setDocInfo(docInfo)
+    const docInfo = doctors.find(doc => doc._id === docId)  // creates a temporary variable and store the find id from the global docId
+    setDocInfo(docInfo)  // it makes the find doctor to save and all info. related to present in this field .
   }
 
-  const getAvailableSlots = async () => {
-    setDocSlots([])
+  const getAvailableSlots = async () => { // Declares a variable holding our scheduling function.and async is used as it takes time load 7 days.
+    setDocSlots([])  // Clears out any old data from our time-slots array. This is a crucial reset step. If you switch from
+    //  looking at Doctor A to Doctor B, you want to immediately wipe out Doctor A's calendar slots so they don't accidentally mix together.
 
-    let today = new Date()
+    let today = new Date()  // it takes exact moment time , hour , date of the users screen 
 
-    for (let i = 0; i < 7; i++) {
-      let currentDate = new Date(today)
-      currentDate.setDate(today.getDate() + i)
+    for (let i = 0; i < 7; i++) {  // 0 represents the today
+      let currentDate = new Date(today)  //Creates a temporary working clock clone for our loop calculation.
+      currentDate.setDate(today.getDate() + i)  //Advances our working clock forward by i days.
 
       // FIX: Set dynamic end time matching loop index 'i'
       let endTime = new Date();
       endTime.setDate(today.getDate() + i)
-      endTime.setHours(21, 0, 0, 0)
+      endTime.setHours(21, 0, 0, 0)   //sets the closing time .
 
       // Setting baseline hours safely
-      if (today.getDate() === currentDate.getDate()) {
-        currentDate.setHours(currentDate.getHours() > 10 ? currentDate.getHours() + 1 : 10) // Fixed: Keep '+ 1'
-        currentDate.setMinutes(currentDate.getMinutes() > 30 ? 30 : 0)
+      if (today.getDate() === currentDate.getDate()) { //it checks whether the date we check is equals to todays date .
+        currentDate.setHours(currentDate.getHours() > 10 ? currentDate.getHours() + 1 : 10) // if less than 10 then 10 visible  otherwise current time  +1 visible .
+        currentDate.setMinutes(currentDate.getMinutes() > 30 ? 30 : 0)  // if greater than 30 then 30 otherwise 0 ( of next hour is visible)
       } else {
-        currentDate.setHours(10)
-        currentDate.setMinutes(0)
+        currentDate.setHours(10)  // 10 as initial time visible
+        currentDate.setMinutes(0)  // 0 is starting of minutes
       }
 
-      let timeSlots = []
+      let timeSlots = []  // i am creating a variable which i change later .
 
-      while (currentDate < endTime) {
+      while (currentDate < endTime) {  // loops until night end time of 9PM  is not reached of that date .
         // FIX: Changed 'hours' to 'hour'
-        let formattedTime = currentDate.toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' })
+        let formattedTime = currentDate.toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' })  // this changed the ugly computer time in good looking
 
-        timeSlots.push({
+        timeSlots.push({  // Pushing the things in the tie slots .
           dateTime: new Date(currentDate),
           time: formattedTime
         })
