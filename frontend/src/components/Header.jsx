@@ -2,7 +2,7 @@ import React from 'react'
 import { assets } from '../assets/assets'
 
 const Header = () => {
-  return (
+return (
     <div className="flex flex-col md:flex-row flex-wrap bg-primary rounded-lg px-6 md:px-10 lg:px-20">   {/* flex-nowrap means one-line so here it means not in one line can adjust */}
 
         {/* --------------------- left side------------------- */}

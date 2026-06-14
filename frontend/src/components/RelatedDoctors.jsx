@@ -8,11 +8,13 @@ const RelatedDoctors = ({ speciality, docId }) => {
     const { doctors } = useContext(AppContext)
     const navigate = useNavigate()
 
-    const [relDoc, setRelDocs] = useState([])
+    const [relDoc, setRelDocs] = useState([])   // array to store the related doc.
 
-    useEffect(() => {
-        if (doctors.length > 0 && speciality) {
-            const doctorsData = doctors.filter((doc) => doc.speciality === speciality && doc._id !== speciality && doc._id !== docId)
+    useEffect(() => {   // useEffect is used here The useEffect hook acts as an automated listener. The array at the bottom [doctors, speciality, docId] contains 
+    // its dependencies. This tells React: "Only run this filtering script when the page first loads, or if the global list of doctors updates, or if
+     // the user switches to a completely different doctor profile." If none of those change, it stays asleep to save memory.
+        if (doctors.length > 0 && speciality) {   // it check that the related doctors is related or not  must be greater than 0.
+            const doctorsData = doctors.filter((doc) => doc.speciality === speciality && doc._id !== speciality && doc._id !== docId)  //filtering out 
         setRelDocs(doctorsData)}
     }, [doctors, speciality, docId])
 
@@ -23,7 +25,7 @@ const RelatedDoctors = ({ speciality, docId }) => {
             </h1>
             <p className="sm:w-1/3 text-center text-sm">Simply browse through our extensive list of trusted doctors.</p>
             <div className="w-full grid grid-cols-auto gap-4 pt-5 gap-y-6 px-3 sm:px-0">
-                {relDoc.slice(0, 5).map((item, index) => (   /* Here we are using slice as we want to display only the 0-10 doctors at a time in home screen; */
+ {/*using slice to sort and map to put the global data  */}  {relDoc.slice(0, 5).map((item, index) => (   /* Here we are using slice as we want to display only the 0-10 doctors at a time in home screen; */
                     <div onClick={()=>{navigate(`/appointment/${item._id}`); scrollTo(0 , 0)}} className="border border-blue-200 rounded-xl overflow-hidden cursor-pointer 
                     hover:translate-y-[-10px] transition-all duration-500" key={index}>
                         <img className="bg-blue-50" src={item.image} alt="" />
