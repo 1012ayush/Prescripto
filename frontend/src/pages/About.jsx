@@ -24,16 +24,16 @@ const About = () => {
   </p>
 </div>
 
-<div>
-  <div>
+<div className="flex flex-col md:flex-row mb:20">
+  <div className="border px-10 md:px-16 py-8 sm:py-16 flex flex-col gap-5 text-[15px] hover:bg-primary hover:text-white transition-all duration-300 text-gray-600 cursor-pointer">
     <b>EFFICIENCY</b>
     <p>Streamlined Appointment Scheduling That Fits Into Your Busy Lifestyle.</p>
   </div>
-  <div>
+  <div className="border px-10 md:px-16 py-8 sm:py-16 flex flex-col gap-5 text-[15px] hover:bg-primary hover:text-white transition-all duration-300 text-gray-600 cursor-pointer">
     <b>CONVENIENCE</b>
     <p>Access To A Network Of Trusted Healthcare Professional In Your Area.</p>
   </div>
-  <div>
+  <div className="border px-10 md:px-16 py-8 sm:py-16 flex flex-col gap-5 text-[15px] hover:bg-primary hover:text-white transition-all duration-300 text-gray-600 cursor-pointer">
     <b>PERSONALIZATION</b>
     <p>Tailored Recommendation And Reminders To Help You Stay On Top Of Your Health.</p>
   </div>
