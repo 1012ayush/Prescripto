@@ -25,7 +25,7 @@ const RelatedDoctors = ({ speciality, docId }) => {
             </h1>
             <p className="sm:w-1/3 text-center text-sm">Simply browse through our extensive list of trusted doctors.</p>
             <div className="w-full grid grid-cols-auto gap-4 pt-5 gap-y-6 px-3 sm:px-0">
- {/*using slice to sort and map to put the global data  */}  {relDoc.slice(0, 5).map((item, index) => (   /* Here we are using slice as we want to display only the 0-10 doctors at a time in home screen; */
+ {/*using slice to sort and map to put the global data  */}  {relDoc.slice(0, 5).map((item, index) => (   /* Here we are using slice as we want to display only the 0-5 doctors at a time in home screen; */
                     <div onClick={()=>{navigate(`/appointment/${item._id}`); scrollTo(0 , 0)}} className="border border-blue-200 rounded-xl overflow-hidden cursor-pointer 
                     hover:translate-y-[-10px] transition-all duration-500" key={index}>
                         <img className="bg-blue-50" src={item.image} alt="" />

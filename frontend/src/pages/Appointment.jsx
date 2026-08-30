@@ -121,12 +121,16 @@ const Appointment = () => {
                 {/* FIX: Changed lowercase 'datetime' to camelCase 'dateTime' */}
                 <p className="text-xs font-bold">{item[0] && daysOfWeek[item[0].dateTime.getDay()]}</p>
                 <p className="text-lg mt-1">{item[0] && item[0].dateTime.getDate()}</p>
+                {/*item[0] looks at the very first time slot generated for that specific day. It only does this to figure out what day it is.
+                .getDay() outputs a number from 0-6. It uses that number to pull the word from your 
+                daysOfWeek array (e.g., 0 = 'SUN', 1 = 'MON')
+                .getDate() outputs the actual calendar number (e.g., 14, 15, 29) */}
               </div>
             ))
           }
         </div>
         <div className="flex items-center gap-3 w-full overflow-x-scroll mt-4">
-          {docSlots.length && docSlots[slotIndex].map((item ,index)=> (
+          {docSlots.length && docSlots[slotIndex].map((item ,index)=> ( // maps only the clicked index or index we selected . that's why docSlots[slotIndex].map(item ,index)=> {}
 <p onClick={()=>setSlotTime(item.time) } className={`text-sm font-light flex-shrink-0 px-5 py-2 rounded-full cursor-pointer ${item.time === slotTime ? 'bg-primary text-white ' : 'text-gray-400 border border-gray-300'}`} key={index} >
   {item.time.toLowerCase()}
 </p>
