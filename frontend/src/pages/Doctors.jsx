@@ -4,7 +4,8 @@ import { AppContext } from '../context/AppContext'
 
 const Doctors = () => {
 
-  const { speciality } = useParams()   //dig down and search for speciality doctor
+  const { speciality } = useParams()   //dig down and search for speciality doctor useParams(): Grabs any dynamic parameter from the 
+  // URL If the user visits /doctors/Dermatologist, speciality becomes "Dermatologist"
   const [filterDoc, setFilterDoc] = useState([]) // in this empty array we will add the doctors filtered one.
   const navigate = useNavigate()
   const { doctors } = useContext(AppContext);
@@ -20,7 +21,9 @@ const Doctors = () => {
 
   useEffect(() => {
     applyFilter()
-  }, [doctors, speciality])
+  }, [doctors, speciality]) // useEffect: Automatically re-runs applyFilter whenever the master doctors list 
+  //changes or the user clicks a different specialty link in the URL 
+  // doctors is here if doctor changes then also it triggers and if speciality changes then also it triggers 
 
 
   return (
@@ -28,7 +31,8 @@ const Doctors = () => {
       <p className="text-gray-600">Browse through the doctors specialist.</p>
       <div className=" flex flex-col sm:flex-row items-start gap-5 mt-5">
         <button className={`py-1 px-3 border rounded text-sm transition-all sm:hidden ${showFilter ? 'bg-primary text-white':''}`}onClick={()=>setShowFilter(prev => !prev)}>Filters</button> 
-         {/* if it is true it make it false and vice versa */}
+        {/* prev => !prev if it is true it make it false and vice versa sm: hidden it is basically to hide this button from small to all above screens , as only for the mobiles . 
+         showFilter ternary is basically just for designing when it is true the bg-primary and text white applied else nothing just simple */}
         <div className={` flex-col text-sm text-gray-600 gap-4  ${showFilter ? 'flex' : 'hidden sm:flex'}`}>
           <p onClick={() => speciality === 'General physician' ? navigate('/doctors') : navigate('/doctors/General physician')} className={`w-[94vw] sm:w-auto pl-3 py-1.5 pr-16 border  border-gray-300 rounded transition-all cursor-pointer ${speciality === "General physician" ? "bg-indigo-100 text-black " : ""}`}>General physician</p>
           <p onClick={() => speciality === 'Gynecologist' ? navigate('/doctors') : navigate('/doctors/Gynecologist')} className={`w-[94vw] sm:w-auto pl-3 py-1.5 pr-16 border border-gray-300 rounded transition-all cursor-pointer ${speciality === "Gynecologist" ? "bg-indigo-100 text-black " : ""}`}>Gynecologist</p>

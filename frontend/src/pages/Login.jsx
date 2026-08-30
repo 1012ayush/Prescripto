@@ -9,7 +9,7 @@ const Login = () => {
   const [name, setName] = useState('')
 
   const onSubmitHandler = async (event) => {
-    event.preventDefault()
+    event.preventDefault() // When the user submits this form, please STOP the browser from refreshing the page.
   }
 
   return (
@@ -17,20 +17,19 @@ const Login = () => {
 <div className="flex flex-col gap-3 m-auto items-start p-8 min-w-[340px] sm:min-w-96 border rounded-xl text-zinc-600 text-sm shadow-lg">
   <p className="text-2xl font-semibold ">{state === 'Sign Up' ? "Create Account" :"Login" }</p> {/* If state is not Sign In it shows Create Account otherwise Login */}
   <p>Please {state === 'Sign Up' ? "sign up" :"log in" } to book  appointment</p>
-  {                                                                // Ternary operator to show the name input box in register only
-    state === "Sign Up" && <div className="w-full ">
+  {state === "Sign Up" && <div className="w-full">
     <p>Full Name</p>                             
-    <input className="border border-zinc-300 rounded w-full p-2 mt-1" type="text" onChange={()=>setName(e.target.name)} value={name} required/> {/* Whenever we change the input value it stored in the state variable */}
-  </div>
-  }
+    <input className="border border-zinc-300 rounded w-full p-2 mt-1" type="text" onChange={(e) => setName(e.target.value)} value={name} required/>
+  </div>}
   
-   <div className="w-full ">
+  <div className="w-full">
     <p>Email</p>
-    <input className="border border-zinc-300 rounded w-full p-2 mt-1" type="email" onChange={()=>setEmail(e.target.name)} value={email} required/> {/* Whenever we change the input value it stored in the state variable */}
+    <input className="border border-zinc-300 rounded w-full p-2 mt-1" type="email" onChange={(e) => setEmail(e.target.value)} value={email} required/>
   </div>
-   <div className="w-full ">
+
+  <div className="w-full">
     <p>Password</p>
-    <input className="border border-zinc-300 rounded w-full p-2 mt-1" type="password" onChange={()=>setPassword(e.target.name)} value={password} required/> {/* Whenever we change the input value it stored in the state variable */}
+    <input className="border border-zinc-300 rounded w-full p-2 mt-1" type="password" onChange={(e) => setPassword(e.target.value)} value={password} required/>
   </div>
   <button className="bg-primary text-white w-full py-2 rounded-md text-base">{state === 'Sign Up' ? "Create Account" :"Login" }</button>
   {
